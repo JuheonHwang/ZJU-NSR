@@ -167,6 +167,8 @@ def get_all_mask_points(masks_dir):
     mask_ims = []
     for path in mask_paths:
         img = mpimg.imread(path)
+        img = img * 255
+        img = np.expand_dims(img, axis=2)
         cur_mask = img.max(axis=2) > 0.5
         mask_points = np.where(img.max(axis=2) > 0.5)
         xs = mask_points[1]
